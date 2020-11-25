@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+
+    public GameObject gameOverText, restartButton;
     public float speed = 10f;
     // Start is called before the first frame update
     void Start()
     {
-
+        gameOverText.SetActive(false);
+        restartButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -28,5 +31,15 @@ public class Movement : MonoBehaviour
                
         }
         
+    }
+
+    void OnCollisionEnter2D (Collision2D col)
+    {
+        if (col.gameObject.tag.Equals("Enemy"))
+        {
+            gameOverText.SetActive(true);
+            restartButton.SetActive(true);
+            gameObject.SetActive(false);
+        }
     }
 }
